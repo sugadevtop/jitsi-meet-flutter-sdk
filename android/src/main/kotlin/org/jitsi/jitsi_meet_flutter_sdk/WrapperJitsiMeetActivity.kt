@@ -102,11 +102,6 @@ class WrapperJitsiMeetActivity : JitsiMeetActivity() {
                     )
 
                     BroadcastEvent.Type.READY_TO_CLOSE.action -> eventStreamHandler.readyToClose()
-
-                    BroadcastEvent.Type.CUSTOM_BUTTON_PRESSED.action -> eventStreamHandler.customButtonPressed(
-                        data
-                    )
-
                     else -> {}
                 }
             }

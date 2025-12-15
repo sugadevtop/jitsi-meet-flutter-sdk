@@ -22,7 +22,8 @@ class _MyAppState extends State<MyApp> {
 
   join() async {
     var options = JitsiMeetConferenceOptions(
-      room: "testgabigabi",
+      room: "testHSuga1",
+      serverURL: "https://video.idnvideoproxy.com",
       configOverrides: {
         "startWithAudioMuted": true,
         "startWithVideoMuted": true,
