@@ -106,6 +106,7 @@ class _MyAppState extends State<MyApp> {
     var listener = JitsiMeetEventListener(
       conferenceJoined: (url) {
         debugPrint("conferenceJoined: url: $url");
+        _jitsiMeetPlugin.enterPiP();
       },
       conferenceTerminated: (url, error) {
         debugPrint("conferenceTerminated: url: $url, error: $error");

@@ -10,6 +10,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import org.jitsi.meet.sdk.BroadcastEvent
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import android.app.KeyguardManager
+import android.content.res.Configuration
 import android.view.WindowManager
 import android.os.Build
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
@@ -34,10 +35,22 @@ class WrapperJitsiMeetActivity : JitsiMeetActivity() {
         }
     }
 
+    var onStopCalled: Boolean = false;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         showOnLockscreen()
         super.onCreate(savedInstanceState)
         registerForBroadcastMessages()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        onStopCalled = true;
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onStopCalled = false
     }
 
     private fun showOnLockscreen() {
@@ -111,6 +124,17 @@ class WrapperJitsiMeetActivity : JitsiMeetActivity() {
     override fun onDestroy() {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(this.broadcastReceiver)
         super.onDestroy()
+    }
+
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: Configuration
+    ) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
+        if (!isInPictureInPictureMode && onStopCalled) {
+            // Picture-in-Picture mode has been closed, we can (should !) end the call
+            leave()
+        }
     }
 
     fun enterPiP() {
