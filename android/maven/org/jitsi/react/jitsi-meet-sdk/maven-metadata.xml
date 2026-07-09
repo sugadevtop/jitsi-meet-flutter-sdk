@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>org.jitsi.react</groupId>
+  <artifactId>jitsi-meet-sdk</artifactId>
+  <versioning>
+    <latest>9753-teanis</latest>
+    <release>9753-teanis</release>
+    <versions>
+      <version>9753-teanis</version>
+    </versions>
+    <lastUpdated>20260709090259</lastUpdated>
+  </versioning>
+</metadata>
